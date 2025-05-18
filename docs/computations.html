@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Quarto Computations</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-90c46dab21af1e79a2f806b2fd46f8a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#numpy" id="toc-numpy" class="nav-link active" data-scroll-target="#numpy">NumPy</a></li>
+  <li><a href="#matplotlib" id="toc-matplotlib" class="nav-link" data-scroll-target="#matplotlib">Matplotlib</a></li>
+  <li><a href="#plotly" id="toc-plotly" class="nav-link" data-scroll-target="#plotly">Plotly</a></li>
+  <li><a href="#این-یک-تست-است" id="toc-این-یک-تست-است" class="nav-link" data-scroll-target="#این-یک-تست-است">این یک تست است</a></li>
+  <li><a href="#فصل-دوم" id="toc-فصل-دوم" class="nav-link" data-scroll-target="#فصل-دوم">فصل دوم</a>
+  <ul class="collapse">
+  <li><a href="#طراحی" id="toc-طراحی" class="nav-link" data-scroll-target="#طراحی">طراحی</a>
+  <ul class="collapse">
+  <li><a href="#ساختار-پرسشنامه" id="toc-ساختار-پرسشنامه" class="nav-link" data-scroll-target="#ساختار-پرسشنامه">ساختار پرسش‌نامه</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#نمونهگیری" id="toc-نمونهگیری" class="nav-link" data-scroll-target="#نمونهگیری">نمونه‌گیری</a>
+  <ul class="collapse">
+  <li><a href="#دستهبندی" id="toc-دستهبندی" class="nav-link" data-scroll-target="#دستهبندی">دسته‌بندی</a></li>
+  <li><a href="#تعریف-و-اهمیت-smeها-در-ایران" id="toc-تعریف-و-اهمیت-smeها-در-ایران" class="nav-link" data-scroll-target="#تعریف-و-اهمیت-smeها-در-ایران">تعریف و اهمیت SMEها در ایران</a></li>
+  <li><a href="#انتخاب-مبنای-دستهبندی" id="toc-انتخاب-مبنای-دستهبندی" class="nav-link" data-scroll-target="#انتخاب-مبنای-دستهبندی">انتخاب مبنای دسته‌بندی</a></li>
+  <li><a href="#انجام-نمونهگیری" id="toc-انجام-نمونهگیری" class="nav-link" data-scroll-target="#انجام-نمونهگیری">انجام نمونه‌گیری</a></li>
+  <li><a href="#چرخه-انتخاب-شرکتها" id="toc-چرخه-انتخاب-شرکتها" class="nav-link" data-scroll-target="#چرخه-انتخاب-شرکتها">چرخه انتخاب شرکت‌ها</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Quarto Computations</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="numpy" class="level2">
+<h2 class="anchored" data-anchor-id="numpy">NumPy</h2>
+<div id="333178f2-6bbc-48d6-99f4-4e4f6ab020f9" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.arange(<span class="dv">15</span>).reshape(<span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>array([[ 0,  1,  2,  3,  4],
+       [ 5,  6,  7,  8,  9],
+       [10, 11, 12, 13, 14]])</code></pre>
+</div>
+</div>
+</section>
+<section id="matplotlib" class="level2">
+<h2 class="anchored" data-anchor-id="matplotlib">Matplotlib</h2>
+<div id="923faf21-dfa9-4b72-8e05-82619a5e7429" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="computations_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="plotly" class="level2">
+<h2 class="anchored" data-anchor-id="plotly">Plotly</h2>
+<div id="90a852a5-20e9-4597-b55e-23861591693c" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+</section>
+<section id="این-یک-تست-است" class="level1 farsi">
+<h1>این یک تست است</h1>
+<p>و این تست در سمت چپ نوشته شده است این یکی از مواهب خطوط بلند است که ممکن می‌شود در دو گوشه یک دایره به هم برسند و از یکدیگر بگذرند. اگر از یکدیگر بگذرند، یعنی از یکدیگر گذشته‌اند و اگر از یکدیگر گذشته باشند.</p>
+<p>حال باید یدید که با چنین متنی چه می‌کن؟؟</p>
+</section>
+<section id="فصل-دوم" class="level1 farsi">
+<h1>فصل دوم</h1>
+<p>فرضیه‌های فصل اول</p>
+<p>فصل دوم این پژوهش به شناسایی و تحلیل اهداف و انگیزه‌های نیروی انسانی موجود در بخش اقتصاد دیجیتال در استان تهران با استفاده از روش پیمایش جمعیتی نمونه از شاغلین موجود در بخش اقتصاد دیجیتال استان تهران اختصاص دارد. بنابراین در وهله اول باید راهی یافت تا بتوان اهداف و انگیزه‌های نیروی انسانی بخش اقتصاد دیجیتال را از مهاجرت از سازمان با آن سنجید و پس از یافتن این راه، به سراغ جمعیتی نمونه از شاغلان این حوزه رفت.</p>
+<section id="طراحی" class="level2">
+<h2 class="anchored" data-anchor-id="طراحی">طراحی</h2>
+<p>در ابتدا و پیش از طراحی پرسش‌نامه، در پی آن برآمدیم تا بفهمیم منابع انسانی شرکت‌ها زمانی که نیرویی از آن شرکت می‌رود معمولا چه می‌پرسند. مساله‌ای که توجه ما را به خود جلب کرد این بود که جستجوی در منابع نشانمان داد عمده پژوهش‌های صورت گرفته روی موضوع ترک سازمان، در حوزه منابع انسانی سازمان‌هاست و جامعه‌شناسان پرسش‌نامه استانداردی برای آن ندارند. همین طور به واسطه ورود انسان‌شناسان به استارت‌آپ‌ها و در دست گرفتن فرایندهای طراحی تجربه کاربری، بخش‌های گوناگون منابع انسانی سازمان‌ها نیز از رویکردهای انسان‌شناسانه اثر پذیرفته‌اند و در هنگام خروج افراد از سازمان، به جای پرسش‌نامه خروج استاندارد، مصاحبه خروج دارند. به عبارت دیگر، اغلب توصیه‌هایی که به منابع انسانی سازمان‌ها می‌شد که چه و چطور بپرسند رویکردی کیفی داشتند و به جای این که پرسش‌نامه‌ای آماده پیشنهاد دهند که در اختیار افراد قرار گیرد تا پر کنند و بخش منابع انسانی را از کم و کاستی‌ها باخبر سازند، بیشتر بر گفتگو و مصاحبه تاکید داشتند و پرسش‌های کلی پیشنهاد می‌دادند. از این رو، متوجه شدیم که بر خلاف تصور قبلی ما، رویکردهای پژوهش‌های کیفی به واسطه حضور انسان‌شناسان و جامعه‌شناسان در بخش‌های طراحی کاربری شرکت‌های خارجی و گسترش حیطه نفوذ و اثربخشی آنان به دیگر بخش‌هایی که با گروه‌های انسانی سر و کار دارند، کم کم جای رویکردهای کیفی را در شرکت‌های فناورانه باز کرده است.</p>
+<p>چنین شد که به جای مبنا قرار دادن پرسش‌نامه‌ای از پیش تعیین‌شده،‌ خود دست به کار طراحی پرسش‌نامه‌ای بر اساس نیاز پروژه و نتایج برآمده از فاز پیشین شدیم.</p>
+<section id="ساختار-پرسشنامه" class="level3">
+<h3 class="anchored" data-anchor-id="ساختار-پرسشنامه">ساختار پرسش‌نامه</h3>
+<p>پرسش‌نامه ۹ بخش دارد. بخش اول پرسش‌هایی هستند که به اطلاعات زمینه‌ای می‌پردازند. بخش‌های دوم تا هشتم درباره محیط و شرایط کار هستند و تلاش دارند تصویری از برداشت فرد از وضعیت خود در شرکت ترسیم کنند. بخش نهم به مساله ترک شرکت و مهاجرت می‌پردازد. ۵۶ پرسش از مشارکت‌کنندگان پرسیده می‌شود و به طور میانگین پر کردن آن ۶ دقیقه از هر فرد زمان می‌گیرد.</p>
+<p>جدول زیر شمایی کلی از پرسش‌نامه ارائه می‌دهد:</p>
+</section>
+</section>
+</section>
+<div class="farsi">
+<table class="caption-top table">
+<caption>جدول پرسش‌های پرسش‌نامه</caption>
+<colgroup>
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 50%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">شماره سوال</th>
+<th style="text-align: center;">بخش</th>
+<th style="text-align: center;">موضوع بخش</th>
+<th style="text-align: center;">شماره سوال در بخش</th>
+<th>سوال</th>
+<th style="text-align: center;">نوع</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">اطلاعات زمینه‌ای</td>
+<td style="text-align: center;">1</td>
+<td>جنسیت شما</td>
+<td style="text-align: center;">چند گزینه‌ای - تک انتخابی</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">اطلاعات زمینه‌ای</td>
+<td style="text-align: center;">2</td>
+<td>سن شما</td>
+<td style="text-align: center;">چند گزینه‌ای - تک انتخابی</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">اطلاعات زمینه‌ای</td>
+<td style="text-align: center;">3</td>
+<td>وضعیت تاهل</td>
+<td style="text-align: center;">چند گزینه‌ای - تک انتخابی</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">اطلاعات زمینه‌ای</td>
+<td style="text-align: center;">4</td>
+<td>سطح تحصیلات</td>
+<td style="text-align: center;">چند گزینه‌ای - تک انتخابی</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">اطلاعات زمینه‌ای</td>
+<td style="text-align: center;">5</td>
+<td>رشته تحصیلی</td>
+<td style="text-align: center;">کوتاه پاسخ</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">اطلاعات زمینه‌ای</td>
+<td style="text-align: center;">6</td>
+<td>دانشگاه محل تحصیل</td>
+<td style="text-align: center;">کوتاه پاسخ</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">اطلاعات زمینه‌ای</td>
+<td style="text-align: center;">7</td>
+<td>سابقه کار شما در حوزه فناوری اطلاعات</td>
+<td style="text-align: center;">چند گزینه‌ای - تک انتخابی</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">اطلاعات زمینه‌ای</td>
+<td style="text-align: center;">8</td>
+<td>مدت زمان فعالیت شما در شرکت فعلی</td>
+<td style="text-align: center;">چند گزینه‌ای - تک انتخابی</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">اطلاعات زمینه‌ای</td>
+<td style="text-align: center;">9</td>
+<td>نوع قراردادتان با شرکت</td>
+<td style="text-align: center;">چند گزینه‌ای - تک انتخابی</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">اطلاعات زمینه‌ای</td>
+<td style="text-align: center;">10</td>
+<td>اصلی‌ترین نقش یا عنوان شغلی فعلی شما</td>
+<td style="text-align: center;">چند گزینه‌ای - تک انتخابی</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">اطلاعات زمینه‌ای</td>
+<td style="text-align: center;">11</td>
+<td>اندازه شرکت</td>
+<td style="text-align: center;">چند گزینه‌ای - تک انتخابی</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">رضایت شغلی و تجربه کاری</td>
+<td style="text-align: center;">1</td>
+<td>از شرح شغل خود راضی هستم</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">رضایت شغلی و تجربه کاری</td>
+<td style="text-align: center;">2</td>
+<td>از وظایفی که به من داده می‌شود راضی هستم</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">رضایت شغلی و تجربه کاری</td>
+<td style="text-align: center;">3</td>
+<td>احساس می‌کنم شغل من با مهارت‌ها و علاقه‌مندی‌هایم هم‌خوانی دارد</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">رضایت شغلی و تجربه کاری</td>
+<td style="text-align: center;">4</td>
+<td>در کل، از شغل و موقعیت شغلی فعلی خود رضایت دارم</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">رضایت شغلی و تجربه کاری</td>
+<td style="text-align: center;">5</td>
+<td>احساس می‌کنم که شغلم در موفقیت کلی سازمان تأثیرگذار است</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">رضایت شغلی و تجربه کاری</td>
+<td style="text-align: center;">6</td>
+<td>می‌توان گفت سازمان قدردان تلاش‌های من است</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">تعادل کار و زندگی</td>
+<td style="text-align: center;">1</td>
+<td>زمان کاری من مناسب است و به من اجازه می‌دهد بین کار و زندگی تعادل برقرار کنم</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">تعادل کار و زندگی</td>
+<td style="text-align: center;">2</td>
+<td>شرکت امکان دورکاری برای من فراهم می‌کند</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">تعادل کار و زندگی</td>
+<td style="text-align: center;">3</td>
+<td>شرکت به سلامت جسمی کارکنان اهمیت می‌دهد</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">تعادل کار و زندگی</td>
+<td style="text-align: center;">4</td>
+<td>شرکت به سلامت روانی کارکنان اهمیت می‌دهد</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">تعادل کار و زندگی</td>
+<td style="text-align: center;">5</td>
+<td>شرایط کار در این شرکت امکان ایفای دیگر نقش‌ها و مسئولیت‌‌های کارکنان در زندگی (مانند والد بودن، همسر بودن، مراقبت از اعضای خانواده و …) را فراهم می‌کند</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">تعادل کار و زندگی</td>
+<td style="text-align: center;">6</td>
+<td>از سیاست‌ها و برنامه‌های شرکت برای حفظ تعادل کار و زندگی رضایت دارم</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">حقوق و مزایا</td>
+<td style="text-align: center;">1</td>
+<td>از میزان حقوق و مزایای دریافتی خود رضایت دارم</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">حقوق و مزایا</td>
+<td style="text-align: center;">2</td>
+<td>حقوق من در این شرکت در مقایسه با دیگر شرکت‌ها رقابتی است</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">حقوق و مزایا</td>
+<td style="text-align: center;">3</td>
+<td>مزایای جانبی شرکت (بیمه، پاداش، مرخصی و …) از کیفیت کافی برخوردار است</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">27</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">حقوق و مزایا</td>
+<td style="text-align: center;">4</td>
+<td>توزیع دستمزد در سازمان ما عادلانه است</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">28</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">حقوق و مزایا</td>
+<td style="text-align: center;">5</td>
+<td>حقوق و مزایای من با توجه به میزان کارم منصفانه است</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">29</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">حقوق و مزایا</td>
+<td style="text-align: center;">6</td>
+<td>حقوق و مزایای من با توجه به اهمیت کارم منصفانه است</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">فرصت‌های رشد و آموزش</td>
+<td style="text-align: center;">1</td>
+<td>مسیرهای روشن و مشخصی برای ارتقاء شغلی در سازمان وجود دارد</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">31</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">فرصت‌های رشد و آموزش</td>
+<td style="text-align: center;">2</td>
+<td>من از برنامه‌های آموزشی و توسعه مهارت‌ها در شرکت بهره‌مند شده‌ام</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">فرصت‌های رشد و آموزش</td>
+<td style="text-align: center;">3</td>
+<td>فرصت‌های کافی برای یادگیری و رشد حرفه‌ای در شرکت وجود دارد</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">33</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">فرصت‌های رشد و آموزش</td>
+<td style="text-align: center;">4</td>
+<td>امکان یادگیری از همکاران و مدیران در شرکت وجود دارد.</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">34</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">فرهنگ سازمانی و محیط کار</td>
+<td style="text-align: center;">1</td>
+<td>از فرهنگ سازمانی و ارزش‌های شرکت رضایت دارم</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">فرهنگ سازمانی و محیط کار</td>
+<td style="text-align: center;">2</td>
+<td>شرکت مرا همانطور که هستم می‌پذیرد</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">36</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">فرهنگ سازمانی و محیط کار</td>
+<td style="text-align: center;">3</td>
+<td>محیط کار من صمیمی و مشارکت‌محور است</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">37</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">فرهنگ سازمانی و محیط کار</td>
+<td style="text-align: center;">4</td>
+<td>در این سازمان امنیت شغلی دارم</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">فرهنگ سازمانی و محیط کار</td>
+<td style="text-align: center;">5</td>
+<td>سازوکار کارآمدی برای کنترل رفتارهای ناسالم سازمانی (رقابت ناسالم، خبرچینی، تخریب وجهه همکاران و…) در سازمان ما وجود دارد</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">39</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">فرهنگ سازمانی و محیط کار</td>
+<td style="text-align: center;">6</td>
+<td>سازوکار کارآمدی برای کنترل رفتارهای ناسالم بین فردی (انواع آزار محیط کار از قبیل آزار جنسی یا سوء استفاده از قدرت) در سازمان ما وجود دارد</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">مدیریت و رهبری</td>
+<td style="text-align: center;">1</td>
+<td>از حمایت و راهنمایی‌های مدیر مستقیم خود رضایت دارم</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">41</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">مدیریت و رهبری</td>
+<td style="text-align: center;">2</td>
+<td>اعتبار و تشویق کاری که انجام می‌دهم به خودم (نه به مدیر مافوقم) می‌رسد</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">42</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">مدیریت و رهبری</td>
+<td style="text-align: center;">3</td>
+<td>مدیران بازخوردهای من را می‌شنوند و به آن‌ها عمل می‌کنند</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">43</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">مدیریت و رهبری</td>
+<td style="text-align: center;">4</td>
+<td>تصمیم‌گیری‌های مدیران برای من شفاف و منطقی است</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">44</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">دیدگاه‌های کلان نسبت به سازمان</td>
+<td style="text-align: center;">1</td>
+<td>شرکت ما در حوزه IT پیشرو است</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">45</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">دیدگاه‌های کلان نسبت به سازمان</td>
+<td style="text-align: center;">2</td>
+<td>شرکت نوآوری‌ها و فناوری‌های جدید را به خوبی پیاده‌سازی می‌کند</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">46</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">دیدگاه‌های کلان نسبت به سازمان</td>
+<td style="text-align: center;">3</td>
+<td>استراتژی‌ها و اهداف کلی شرکت برای من روشن هستند</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">47</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">دیدگاه‌های کلان نسبت به سازمان</td>
+<td style="text-align: center;">4</td>
+<td>شرکت در مواجهه با تغییرات فناوری و نیازهای بازار انعطاف‌پذیری مطلوبی دارد</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">48</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">دیدگاه‌های کلان نسبت به سازمان</td>
+<td style="text-align: center;">5</td>
+<td>منابع و بودجه شرکت به درستی برای دستیابی به اهداف استراتژیک تخصیص داده می‌شوند</td>
+<td style="text-align: center;">طیفی - لیکرت</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">49</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">تصمیم به ماندن یا ترک شرکت</td>
+<td style="text-align: center;">1</td>
+<td>در سال گذشته پیشنهاد شغلی دیگری داشته‌اید؟</td>
+<td style="text-align: center;">چند گزینه‌ای - تک پاسخ</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">تصمیم به ماندن یا ترک شرکت</td>
+<td style="text-align: center;">2</td>
+<td>اگر از این شرکت بروید قصد دارید:</td>
+<td style="text-align: center;">چند گزینه‌ای - تک پاسخ</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">51</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">تصمیم به ماندن یا ترک شرکت</td>
+<td style="text-align: center;">3</td>
+<td>آیا قصد دارید تا دو سال آینده همچنان در این شرکت بمانید</td>
+<td style="text-align: center;">چند گزینه‌ای - تک پاسخ</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">52</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">تصمیم به ماندن یا ترک شرکت</td>
+<td style="text-align: center;">4</td>
+<td>اگر قصد ماندن دارید کدام‌یک از عوامل زیر شما را به ماندن ترغیب می‌کند؟</td>
+<td style="text-align: center;">اولویت‌بندی</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">53</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">تصمیم به ماندن یا ترک شرکت</td>
+<td style="text-align: center;">5</td>
+<td>اگر قصد رفتن از سازمان را دارید کدام‌یک از عوامل زیر بیش‌ترین تأثیر را بر تصمیم شما دارد؟</td>
+<td style="text-align: center;">اولویت‌بندی</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">54</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">تصمیم به ماندن یا ترک شرکت</td>
+<td style="text-align: center;">6</td>
+<td>آیا طی دو سال آینده قصد مهاجرت دارید؟</td>
+<td style="text-align: center;">چند گزینه‌ای - تک پاسخ</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">55</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">تصمیم به ماندن یا ترک شرکت</td>
+<td style="text-align: center;">7</td>
+<td>اگر قصد مهاجرت دارید کدام‌ یک از عوامل زیر بیش‌ترین تأثیر را در تصمیم شما دارد؟</td>
+<td style="text-align: center;">اولویت‌بندی</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">56</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">تصمیم به ماندن یا ترک شرکت</td>
+<td style="text-align: center;">8</td>
+<td>لطفاً حوزه فعالیت و نام شرکتی را که در آن شاغلید بنویسید</td>
+<td style="text-align: center;">کوتاه پاسخ</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="farsi">
+<style type="text/css">
+.tg  {border-collapse:collapse;border-color:#93a1a1;border-spacing:0;border-style:solid;border-width:1px;
+  margin:0px auto;}
+.tg td{background-color:#fdf6e3;border-color:#93a1a1;border-style:solid;border-width:0px;color:#002b36;
+  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{background-color:#657b83;border-color:#93a1a1;border-style:solid;border-width:0px;color:#fdf6e3;
+  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-3hmq{background-color:#fdf6e3;font-family:inherit;text-align:right;vertical-align:top}
+.tg .tg-4tbw{background-color:#eee8d5;color:#444746;font-family:inherit;text-align:right;vertical-align:top}
+.tg .tg-u5z2{font-family:inherit;text-align:center;vertical-align:top}
+.tg .tg-vt90{background-color:#eee8d5;font-family:inherit;text-align:center;vertical-align:top}
+.tg .tg-imk4{font-family:inherit;font-weight:bold;position:-webkit-sticky;position:sticky;text-align:center;top:-1px;
+  vertical-align:top;will-change:transform}
+.tg .tg-jotp{background-color:#eee8d5;font-family:inherit;text-align:right;vertical-align:top}
+.tg .tg-mpw7{font-family:inherit;text-align:right;vertical-align:top}
+@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;margin: auto 0px;}}</style>
+<div class="tg-wrap">
+<table class="tg caption-top table" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="tg-imk4" data-quarto-table-cell-role="th"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">شماره سوال</span></th>
+<th class="tg-imk4" data-quarto-table-cell-role="th"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">بخش</span></th>
+<th class="tg-imk4" data-quarto-table-cell-role="th"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">موضوع بخش</span></th>
+<th class="tg-imk4" data-quarto-table-cell-role="th"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">شماره سوال در بخش</span></th>
+<th class="tg-imk4" data-quarto-table-cell-role="th"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">سوال</span></th>
+<th class="tg-imk4" data-quarto-table-cell-role="th"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">نوع</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اطلاعات زمینه‌ای</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">جنسیت شما</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">چند گزینه‌ای - تک انتخابی</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اطلاعات زمینه‌ای</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">سن شما</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">چند گزینه‌ای - تک انتخابی</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اطلاعات زمینه‌ای</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">وضعیت تاهل</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">چند گزینه‌ای - تک انتخابی</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اطلاعات زمینه‌ای</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">سطح تحصیلات</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">چند گزینه‌ای - تک انتخابی</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اطلاعات زمینه‌ای</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">رشته تحصیلی</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">کوتاه پاسخ</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">6</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اطلاعات زمینه‌ای</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">6</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">دانشگاه محل تحصیل</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">کوتاه پاسخ</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">7</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اطلاعات زمینه‌ای</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">7</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">سابقه کار شما در حوزه فناوری اطلاعات</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">چند گزینه‌ای - تک انتخابی</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">8</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اطلاعات زمینه‌ای</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">8</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">مدت زمان فعالیت شما در شرکت فعلی</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">چند گزینه‌ای - تک انتخابی</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">9</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اطلاعات زمینه‌ای</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">9</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">نوع قراردادتان با شرکت</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">چند گزینه‌ای - تک انتخابی</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">10</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اطلاعات زمینه‌ای</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">10</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اصلی‌ترین نقش یا عنوان شغلی فعلی شما</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">چند گزینه‌ای - تک انتخابی</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">11</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اطلاعات زمینه‌ای</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">11</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اندازه شرکت</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">چند گزینه‌ای - تک انتخابی</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">12</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">رضایت شغلی و تجربه کاری</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">از شرح شغل خود راضی هستم</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">13</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">رضایت شغلی و تجربه کاری</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">از وظایفی که به من داده می‌شود راضی هستم</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">14</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">رضایت شغلی و تجربه کاری</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">احساس می‌کنم شغل من با مهارت‌ها و علاقه‌مندی‌هایم هم‌خوانی دارد</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">15</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">رضایت شغلی و تجربه کاری</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">در کل، از شغل و موقعیت شغلی فعلی خود رضایت دارم</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">16</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">رضایت شغلی و تجربه کاری</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">احساس می‌کنم که شغلم در موفقیت کلی سازمان تأثیرگذار است</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">17</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">رضایت شغلی و تجربه کاری</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">6</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">می‌توان گفت سازمان قدردان تلاش‌های من است</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">18</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تعادل کار و زندگی</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">زمان کاری من مناسب است و به من اجازه می‌دهد بین کار و زندگی تعادل برقرار کنم</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">19</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تعادل کار و زندگی</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">شرکت امکان دورکاری برای من فراهم می‌کند</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">20</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تعادل کار و زندگی</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">شرکت به سلامت جسمی کارکنان اهمیت می‌دهد</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">21</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تعادل کار و زندگی</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">شرکت به سلامت روانی کارکنان اهمیت می‌دهد</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">22</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تعادل کار و زندگی</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">شرایط کار در این شرکت امکان ایفای دیگر نقش‌ها و مسئولیت‌‌های کارکنان در زندگی (مانند والد بودن، همسر بودن، مراقبت از اعضای خانواده و ...) را فراهم می‌کند</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">23</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تعادل کار و زندگی</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">6</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">از سیاست‌ها و برنامه‌های شرکت برای حفظ تعادل کار و زندگی رضایت دارم</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">24</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">حقوق و مزایا</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">از میزان حقوق و مزایای دریافتی خود رضایت دارم</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">25</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">حقوق و مزایا</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">حقوق من در این شرکت در مقایسه با دیگر شرکت‌ها رقابتی است</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">26</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">حقوق و مزایا</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">مزایای جانبی شرکت (بیمه، پاداش، مرخصی و ...) از کیفیت کافی برخوردار است</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">27</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">حقوق و مزایا</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">توزیع دستمزد در سازمان ما عادلانه است</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">28</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">حقوق و مزایا</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+<td class="tg-3hmq"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000">حقوق و مزایای من با توجه به میزان کارم منصفانه است</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">29</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">حقوق و مزایا</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">6</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000">حقوق و مزایای من با توجه به اهمیت کارم منصفانه است</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">30</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">فرصت‌های رشد و آموزش</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">مسیرهای روشن و مشخصی برای ارتقاء شغلی در سازمان وجود دارد</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">31</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">فرصت‌های رشد و آموزش</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">من از برنامه‌های آموزشی و توسعه مهارت‌ها در شرکت بهره‌مند شده‌ام</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">32</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">فرصت‌های رشد و آموزش</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">فرصت‌های کافی برای یادگیری و رشد حرفه‌ای در شرکت وجود دارد</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">33</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">فرصت‌های رشد و آموزش</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">امکان یادگیری از همکاران و مدیران در شرکت وجود دارد.</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">34</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">6</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">فرهنگ سازمانی و محیط کار</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">از فرهنگ سازمانی و ارزش‌های شرکت رضایت دارم</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">35</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">6</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">فرهنگ سازمانی و محیط کار</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">شرکت مرا همانطور که هستم می‌پذیرد</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">36</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">6</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">فرهنگ سازمانی و محیط کار</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">محیط کار من صمیمی و مشارکت‌محور است</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">37</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">6</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">فرهنگ سازمانی و محیط کار</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">در این سازمان امنیت شغلی دارم</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">38</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">6</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">فرهنگ سازمانی و محیط کار</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">سازوکار کارآمدی برای کنترل رفتارهای ناسالم سازمانی (رقابت ناسالم، خبرچینی، تخریب وجهه همکاران و...) در سازمان ما وجود دارد</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">39</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">6</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">فرهنگ سازمانی و محیط کار</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">6</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">سازوکار کارآمدی برای کنترل رفتارهای ناسالم بین فردی (انواع آزار محیط کار از قبیل آزار جنسی یا سوء استفاده از قدرت) در سازمان ما وجود دارد</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">40</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">7</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">مدیریت و رهبری</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">از حمایت و راهنمایی‌های مدیر مستقیم خود رضایت دارم</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">41</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">7</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">مدیریت و رهبری</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-4tbw"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#444746;background-color:transparent">اعتبار و تشویق کاری که انجام می‌دهم به خودم (نه به مدیر مافوقم) می‌رسد</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">42</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">7</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">مدیریت و رهبری</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">مدیران بازخوردهای من را می‌شنوند و به آن‌ها عمل می‌کنند</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">43</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">7</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">مدیریت و رهبری</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تصمیم‌گیری‌های مدیران برای من شفاف و منطقی است</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">44</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">8</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">دیدگاه‌های کلان نسبت به سازمان</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">شرکت ما در حوزه IT پیشرو است</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">45</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">8</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">دیدگاه‌های کلان نسبت به سازمان</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">شرکت نوآوری‌ها و فناوری‌های جدید را به خوبی پیاده‌سازی می‌کند</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">46</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">8</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">دیدگاه‌های کلان نسبت به سازمان</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">استراتژی‌ها و اهداف کلی شرکت برای من روشن هستند</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">47</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">8</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">دیدگاه‌های کلان نسبت به سازمان</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">شرکت در مواجهه با تغییرات فناوری و نیازهای بازار انعطاف‌پذیری مطلوبی دارد</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">48</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">8</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">دیدگاه‌های کلان نسبت به سازمان</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">منابع و بودجه شرکت به درستی برای دستیابی به اهداف استراتژیک تخصیص داده می‌شوند</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">طیفی - لیکرت</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">49</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">9</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تصمیم به ماندن یا ترک شرکت</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">در سال گذشته پیشنهاد شغلی دیگری داشته‌اید؟</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">چند گزینه‌ای - تک پاسخ</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">50</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">9</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تصمیم به ماندن یا ترک شرکت</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اگر از این شرکت بروید قصد دارید:</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">چند گزینه‌ای - تک پاسخ</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">51</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">9</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تصمیم به ماندن یا ترک شرکت</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">آیا قصد دارید تا دو سال آینده همچنان در این شرکت بمانید</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">چند گزینه‌ای - تک پاسخ</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">52</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">9</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تصمیم به ماندن یا ترک شرکت</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اگر قصد ماندن دارید کدام‌یک از عوامل زیر شما را به ماندن ترغیب می‌کند؟</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اولویت‌بندی</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">53</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">9</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تصمیم به ماندن یا ترک شرکت</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اگر قصد رفتن از سازمان را دارید کدام‌یک از عوامل زیر بیش‌ترین تأثیر را بر تصمیم شما دارد؟</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اولویت‌بندی</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">54</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">9</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تصمیم به ماندن یا ترک شرکت</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">6</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">آیا طی دو سال آینده قصد مهاجرت دارید؟</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">چند گزینه‌ای - تک پاسخ</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">55</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">9</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تصمیم به ماندن یا ترک شرکت</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">7</span></td>
+<td class="tg-jotp"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اگر قصد مهاجرت دارید کدام‌ یک از عوامل زیر بیش‌ترین تأثیر را در تصمیم شما دارد؟</span></td>
+<td class="tg-vt90"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">اولویت‌بندی</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">56</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">9</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تصمیم به ماندن یا ترک شرکت</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">8</span></td>
+<td class="tg-mpw7"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">لطفاً حوزه فعالیت و نام شرکتی را که در آن شاغلید بنویسید</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">کوتاه پاسخ</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="farsi">
+<section id="روایی-و-پایایی" class="level3">
+<h3 class="anchored" data-anchor-id="روایی-و-پایایی">روایی و پایایی</h3>
+<p>پرسش‌نامه‌های استاندارد یا آن‌هایی که از روی پرسش‌نامه‌های استاندارد تهیه می‌شوند، چون بارها و بارها از نظر متخصصان گذشته‌اند و همین طور در سنجش‌های مکرر، نتایجی تقریبا همسان داشته‌اند، مورد اعتماد جامعه علمی هستند. این دو ویژگی، یعنی روایی و پایایی، باید برای پرسش‌نامه‌های تازه طراحی‌شده مورد سنجش قرار گیرند تا بتوان به نتایج برآمده از آن‌ها اعتنا داشت.</p>
+<p>این دو شرط روایی و پایایی، در اساس توافق‌های جامعه علمی بر سر ابزار اندازه‌گیری هستند. پرسش‌نامه تازه ادعا دارد که می‌تواند متغیرهایی را اندازه بگیرد. حال متخصصان آن حوزه باید توافق کنند که آیا چنین پرسش‌نامه‌ای اساسا می‌تواند منجر به چنان سنجشی شود یا نه. پس از این که ادعای روایی توانست توافق متخصصان را جلب کند، باید دید که خود این ابزار آیا با تکرار استفاده نتایجی همسان ارائه می‌دهد یا نتایج چنان با هم ناهم‌خوان هستند که جایی از کار می‌لنگد؟</p>
+<p>برای سنجش روایی پرسش‌نامه آن را در اختیار ۵ متخصص قرار دادیم. ۲ نفر از آنان متخصص حوزه منابع انسانی بودند. ۲ نفر دیگر دکتری جامعه‌شناسی داشتند و در حوزه‌های گوناگون به پژوهش‌های کمی می‌پرداختند. نفر پنجم استاد برجسته دانشگاه بود که علاوه بر تسلط بر انواع روش‌های کمی و کیفی و زیر و بم‌های هر کدام، شناخت عمیقی از شیوه‌های گوناگون پژوهش بر جنبه‌های اقتصادی جوامع کوچک و متوسط مقیاس دارد.</p>
+<p>یکی از متخصصان پیشنهاد اضافه کردن یک پرسش را مطرح کرد که به پرسش‌نامه اضافه شد و دوباره در اختیار آنان قرار گرفت. به جز این، اصلاح دیگری بر پرسش‌نامه اولیه اعمال نشد و هر پنج متخصص بر اعتبار/روایی پرسش‌نامه اتفاق نظر داشتند. از این رو آماده سنجش پایایی آن با آزمون اولیه شدیم.</p>
+</section>
+<section id="آزمون-اولیه" class="level3">
+<h3 class="anchored" data-anchor-id="آزمون-اولیه">آزمون اولیه</h3>
+<p>آزمون اولیه با مشارکت ۱۰ نفر از جامعه هدف (کارمندان شرکت‌های فناوری اطلاعات استان تهران) که به طور تصادفی انتخاب نشده بودند برگزار شد. لینک پرسش‌نامه آنلاین را برایشان فرستادیم و ظرف ۹ روز پاسخ‌ها را جمع کردیم. تحلیل نتایج نشان می‌داد که نتایج متفاوت ولی همسان هستند، یعنی پرسش‌ها به شکل‌های گوناگونی در افراد مختلف تفسیر نمی‌شوند و دامنه تغییرات پاسخ‌ها به حدی نیست که نشان دهد ایرادی ساختاری یا مفهومی در پرسش‌نامه وجود دارد.</p>
+<p>از این جا نیز پی بردیم که نتیجه کار، طراحی پرش‌نامه‌ای معتبر شده است که می‌تواند ما را در فهم بهتر اهداف و انگیزه‌های جامعه هدف یاری دهد.</p>
+</section>
+<section id="جمعآوری-داده-شرکتها" class="level2">
+<h2 class="anchored" data-anchor-id="جمعآوری-داده-شرکتها">جمع‌آوری داده شرکت‌ها</h2>
+<p>در کنار طراحی پرسش‌نامه، لازم بود بدانیم شاغلان در حوزه اقتصاد دیجیتال کجا کار می‌کنند تا بتوانیم از میان آنان جمعیتی نمونه بگیریم و پرسش‌نامه را برایشان بفرستیم تا نتایج تحلیل‌های برآمده از آن قابل تعمیم باشد. مشکل از همان ابتدا شروع شد. آمار دقیقی از تعداد شاغلان حوزه اقتصاد دیجیتال وجود ندارد. یعنی مثلا مرکز آمار ایران یا اتاق بازرگانی، صنایع و معادن و کشاورزی استان تهران یا نظام صنفی رایانه‌ای استان تهران آمار درست و قابل اتکایی از تعداد شاغلان این حوزه ندارند. آمارهای برخی شرکت‌ها مانند گزارش نظرسنجی جامعه برنامه‌نویسان ایران ۱۴۰۳ که توسط کوئرا منتشر شده‌اند آنقدر از نظر علمی ایراد دارند که نه تنها قابل اعتماد نیستند، که بی‌معنا، بی‌ارزش و گمراه‌کننده هستند. خود این مساله، علی رغم این که سال‌ها طرح‌های مختلفی برای آمارگیری از شرکت‌های حوزه فناوری اطلاعات وجود داشته و با موفقیت اجرا شده است (مانند طرح‌های شورای عالی انفورماتیک کشور و تکفا)، جای بررسی علمی و دقیق‌تر دارد که باید در جای دیگری بررسی گردد. راهی که ما در پیش گرفتیم استخراج داده از شرکت‌های کاریابی آنلاین بود؛ به این صورت که ابتدا شرکت‌هایی را بیابیم که در این سایت‌ها ثبت شده‌اند و در تهران هستند. سپس بر اساس تعداد کارمندانی که خود اعلام کرده‌اند، تخمینی از جمعیت شاغلان اقتصاد دیجیتال به دست آوریم، جمعیت نمونه را انتخاب کنیم و به سراغشان رویم. به نظرمان رسید سایت ایران تلنت برای این کار مناسب باشد.</p>
+<section id="ایران-تلنت" class="level3">
+<h3 class="anchored" data-anchor-id="ایران-تلنت">ایران تلنت</h3>
+<p>با برنامه‌ای پایتونی داده‌های ۹۵۵ شرکت را از سایت ایران تلنت استخراج کردیم. از میان آنان ۷۱۳ شرکت در تهران بودند. پراکندگی این شرکت‌ها را بر اساس دسته‌بندی تعداد کارمندان، که در سایت ارائه شده است، در جدول زیر می‌بینید:</p>
+<div class="grid">
+<div class="g-col-3">
+
+</div>
+<div class="g-col-6">
+<style type="text/css">
+.tg  {border-collapse:collapse;border-color:black;border-spacing:0;border-style:solid;border-width:1px;margin:0px auto;}
+.tg td{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;
+  padding:10px 5px;word-break:normal;}
+.tg th{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-2bm9{font-family:inherit;text-align:center;vertical-align:top}
+.tg .tg-1jcf{font-family:inherit;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-u5z2{font-family:inherit;text-align:center;vertical-align:top}
+@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;margin: auto 0px;}}</style>
+<div class="tg-wrap">
+<table class="tg caption-top table" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="tg-1jcf" data-quarto-table-cell-role="th"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تعداد کارمند</span></th>
+<th class="tg-1jcf" data-quarto-table-cell-role="th"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تعداد شرکت</span></th>
+<th class="tg-1jcf" data-quarto-table-cell-role="th"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">درصد</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="tg-2bm9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1-9</span></td>
+<td class="tg-2bm9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">59</span></td>
+<td class="tg-2bm9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">8.27</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">10-49</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">340</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">47.69</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-2bm9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">50-99</span></td>
+<td class="tg-2bm9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">158</span></td>
+<td class="tg-2bm9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">22.16</span></td>
+</tr>
+<tr class="even">
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">100-499</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">121</span></td>
+<td class="tg-u5z2"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">16.97</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-2bm9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">500 به بالا</span></td>
+<td class="tg-2bm9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">35</span></td>
+<td class="tg-2bm9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4.91</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="g-col-3">
+
+</div>
+</div>
+<p>بر اساس تعداد شرکت‌ها و بازه‌ای که برای تعداد کارمندانشان ذکر کرده‌اند،‌می‌توان تخمینی از جمعیت شاغلان زد. بنابراین بیشترین تعداد شاغلان حوزه اقتصاد دیجیتال در استان تهران، طبق داده‌های ایران تلنت، ۱۶۳ هزار است. همین طور تنها ۳۵ شرکت در تهران هستند که بیش از ۵۰۰ کارمند دارند. به نظر می‌آید که این تخمین درست نباشد.</p>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Vazirmatn;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Vazirmatn ;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;margin: auto 0px;}}</style>
+<div class="tg-wrap">
+<table class="tg caption-top table" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td colspan="7" class="tg-c3ow">تخمین جمعیت</td>
+</tr>
+<tr class="even">
+<td class="tg-0pky"></td>
+<td colspan="2" class="tg-c3ow">Min</td>
+<td colspan="2" class="tg-c3ow">Mid</td>
+<td colspan="2" class="tg-c3ow">Max</td>
+</tr>
+<tr class="odd">
+<td class="tg-c3ow">جمعیت</td>
+<td colspan="2" class="tg-c3ow">41,077</td>
+<td colspan="2" class="tg-c3ow">93,645</td>
+<td colspan="2" class="tg-c3ow">163,212</td>
+</tr>
+<tr class="even">
+<td class="tg-c3ow">دسته‌بندی/شرکت‌ها</td>
+<td class="tg-c3ow">تعداد کارمند</td>
+<td class="tg-c3ow">تعداد کل کارمندان</td>
+<td class="tg-c3ow">تعداد کارمند</td>
+<td class="tg-c3ow">تعداد کل کارمندان</td>
+<td class="tg-c3ow">تعداد کارمند</td>
+<td class="tg-c3ow">تعداد کل کارمندان</td>
+</tr>
+<tr class="odd">
+<td class="tg-c3ow">1-9</td>
+<td class="tg-c3ow">3</td>
+<td class="tg-c3ow">177</td>
+<td class="tg-c3ow">5</td>
+<td class="tg-c3ow">295</td>
+<td class="tg-c3ow">9</td>
+<td class="tg-c3ow">531</td>
+</tr>
+<tr class="even">
+<td class="tg-c3ow">10-49</td>
+<td class="tg-c3ow">10</td>
+<td class="tg-c3ow">3,400</td>
+<td class="tg-c3ow">30</td>
+<td class="tg-c3ow">10,200</td>
+<td class="tg-c3ow">49</td>
+<td class="tg-c3ow">16,660</td>
+</tr>
+<tr class="odd">
+<td class="tg-c3ow">50-99</td>
+<td class="tg-c3ow">50</td>
+<td class="tg-c3ow">7,900</td>
+<td class="tg-c3ow">75</td>
+<td class="tg-c3ow">11,850</td>
+<td class="tg-c3ow">99</td>
+<td class="tg-c3ow">15,642</td>
+</tr>
+<tr class="even">
+<td class="tg-c3ow">100-499</td>
+<td class="tg-c3ow">100</td>
+<td class="tg-c3ow">12,100</td>
+<td class="tg-c3ow">300</td>
+<td class="tg-c3ow">36,300</td>
+<td class="tg-c3ow">499</td>
+<td class="tg-c3ow">60,379</td>
+</tr>
+<tr class="odd">
+<td class="tg-c3ow">500 به بالا</td>
+<td class="tg-c3ow">500</td>
+<td class="tg-c3ow">17,500</td>
+<td class="tg-c3ow">1000</td>
+<td class="tg-c3ow">35,000</td>
+<td class="tg-c3ow">2000</td>
+<td class="tg-c3ow">70,000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>مشکل این جاست که تعداد شرکت‌های فناوری اطلاعات در تهران علی‌الاصول بیش از ۷۱۳ تاست. بنابراین بایستی فهرست را از جایی دیگر پیدا کرد.</p>
+</section>
+<section id="اتاق-بازرگانی-صنایع-معادن-و-کشاورزی-تهران" class="level3">
+<h3 class="anchored" data-anchor-id="اتاق-بازرگانی-صنایع-معادن-و-کشاورزی-تهران">اتاق بازرگانی، صنایع، معادن و کشاورزی تهران</h3>
+<p>نامه‌نگاری‌های اسفند ماه با اتاق بازرگانی، صنایع، معادن و کشاورزی تهران برای دست‌یافتن به فهرستی از شرکت‌های فعال حوزه فناوری اطلاعات راه به جایی نبرد. تا نیمه فروردین ماه نیز این اتاق گرفتار تعطیلات سال نو بود. در نهایت، مجاهدت در راه علم به ثمر نشست و فهرستی شامل ۴۴ شرکت دانش‌بنیان برایمان ارسال شد که هر چند فهرستی جالب بود اما در وهله اول ارتباطی با حوزه فناوری اطلاعات نداشت (۱۱ مورد از شرکت‌ها در صنایع غیرمرتبط بودند، یعنی ۲۵ درصد داده نامرتبط). در وهله دوم بر ما پوشیده بود که این فهرست چگونه انتخاب شده است و این شرکت‌ها بر چه مبنایی به عنوان جمعیت نمونه (اگر به عنوان جمعیت نمونه) به ما معرفی شده‌اند. در وهله سوم، این تعداد شرکت به لحاظ آماری ارزشی ندارد زیرا ما در لحظه دریافت این فهرست، با فهرستی که از وبسایت جاب‌ویژن ساخته بودیم کار را پیش برده بودیم که ۱۹۰ برابر این فهرست شرکت داشت و جمعیتی حدود ۵۰۰ هزار نفر در اختیارمان می‌گذاشت. بنابراین این فهرست را کنار گذاشتیم.</p>
+</section>
+<section id="جابویژن" class="level3">
+<h3 class="anchored" data-anchor-id="جابویژن">جاب‌ویژن</h3>
+<p>وبسایت جاب‌ویژن از داده‌هایی که نمایش می‌دهد به شدت محافظت می‌کند و تلاش ما برای استخراج داده‌های مورد نیازمان از آن، بیشتر شبیه تلاش تیم‌های فناوری اطلاعات بود تا تیمی متشکل از جامعه‌شناسان. به هر حال داده‌هایی را که می خواستیم به دست آوردیم و جاب‌ویژنی‌ها را با ترافیک سایتشان تنها گذاشتیم تا گزارش سالانه‌شان را تهیه کنند. فهرست اولیه شامل ۱۰۷۱۲ شرکت بود که در نتیجه جستجوی خود وبسایت هم ظاهر می‌شوند. اما بررسی‌های ما نشان داد که تنها ۸۴۵۴ از آن‌ها یک بار آمده‌اند و باقی ۲۲۵۸ تا، بیش از یک بار در فهرست نتایج جاب‌ویژن و آمارهایش تکرار شده‌اند. به عبارت دیگر، تعداد نتایجی که در جستجوی وبسایت نشان داده می‌شود، ۲۱ درصد خطا دارد و این خطا نه از نمایش در سایت، که از خطای ذخیره‌سازی در سمت سرور سایت است. حداقل در مورد استان تهران ۲۱ درصد شرکت‌ها تکراری هستند.</p>
+<p>با حذف این شرکت‌های تکراری، دانشگاه‌ها، شرکت‌های دولتی، وزارت‌خانه‌ها، سازمان‌های دولتی، ارگان‌های دولتی، ستادها، شهرداری‌ها، چون مخاطب کارفرمای پروژه نبودند، در نهایت کار را با <strong>۸۳۶۱</strong> شرکت ادامه دادیم.</p>
+<div class="grid">
+<div class="g-col-3">
+
+</div>
+<div class="g-col-6">
+<style type="text/css">
+.tg  {border-collapse:collapse;border-color:black;border-spacing:0;border-style:solid;border-width:1px;margin:0px auto;}
+.tg td{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;
+  padding:10px 5px;word-break:normal;}
+.tg th{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-3dm3{border-color:inherit;font-family:inherit;text-align:center;vertical-align:top}
+.tg .tg-zffg{border-color:inherit;font-family:inherit;text-align:right;vertical-align:top}
+.tg .tg-dvpl{border-color:inherit;text-align:right;vertical-align:top}
+@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;margin: auto 0px;}}</style>
+<div class="tg-wrap">
+<table class="tg caption-top table" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="tg-zffg" data-quarto-table-cell-role="th"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تعداد کارمندان</span></th>
+<th class="tg-c3ow" data-quarto-table-cell-role="th"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تعداد</span></th>
+<th class="tg-c3ow" data-quarto-table-cell-role="th"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">درصد</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="tg-dvpl"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">زیر 10 نفر</span></td>
+<td class="tg-c3ow"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3300</span></td>
+<td class="tg-c3ow"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">39.469</span></td>
+</tr>
+<tr class="even">
+<td class="tg-dvpl"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">11 تا 50 نفر</span></td>
+<td class="tg-c3ow"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3886</span></td>
+<td class="tg-c3ow"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">46.478</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-dvpl"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">51 تا 200 نفر</span></td>
+<td class="tg-c3ow"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">919</span></td>
+<td class="tg-c3ow"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">10.992</span></td>
+</tr>
+<tr class="even">
+<td class="tg-dvpl"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">201 تا 500 نفر</span></td>
+<td class="tg-c3ow"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">162</span></td>
+<td class="tg-c3ow"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1.938</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-dvpl"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">501 تا 1000 نفر</span></td>
+<td class="tg-c3ow"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">55</span></td>
+<td class="tg-c3ow"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">0.658</span></td>
+</tr>
+<tr class="even">
+<td class="tg-dvpl"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1001 تا 5000 نفر</span></td>
+<td class="tg-c3ow"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">30</span></td>
+<td class="tg-c3ow"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">0.359</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-dvpl"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">بیش از 5000 نفر</span></td>
+<td class="tg-c3ow"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">9</span></td>
+<td class="tg-c3ow"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">0.108</span></td>
+</tr>
+<tr class="even">
+<td class="tg-dvpl"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">مجموع</span></td>
+<td colspan="2" class="tg-3dm3"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">8361</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="g-col-3">
+
+</div>
+</div>
+<p>اگر بخواهیم تخمینی از جمعیت شاغلان حوزه فناوری اطلاعات بر اساس این داده‌ها داشته باشیم، جدولی مانند جدول زیر خواهیم داشت:</p>
+<div class="grid">
+<div class="g-col-2">
+
+</div>
+<div class="g-col-8">
+<style type="text/css">
+.tg  {border-collapse:collapse;border-color:black;border-spacing:0;border-style:solid;border-width:1px;margin:0px auto;}
+.tg td{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;
+  padding:10px 5px;word-break:normal;}
+.tg th{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-al5c{border-color:#000000;font-family:inherit;text-align:center;vertical-align:top}
+.tg .tg-sh4c{text-align:center;vertical-align:top}
+.tg .tg-92dz{border-color:#000000;font-family:inherit;text-align:right;vertical-align:top}
+.tg .tg-baqh{text-align:center;vertical-align:top}
+.tg .tg-g2t9{border-color:#000000;font-family:inherit;text-align:center;vertical-align:top}
+.tg .tg-mrss{border-color:#000000;font-family:inherit;text-align:right;vertical-align:top}
+@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;margin: auto 0px;}}</style>
+<div class="tg-wrap">
+<table class="tg caption-top table" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="tg-g2t9" data-quarto-table-cell-role="th"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تخمین جمعیت</span></th>
+<th colspan="2" class="tg-g2t9" data-quarto-table-cell-role="th"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Min</span></th>
+<th colspan="2" class="tg-g2t9" data-quarto-table-cell-role="th"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Mid</span></th>
+<th colspan="2" class="tg-g2t9" data-quarto-table-cell-role="th"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Max</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="tg-92dz"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تعداد کارمندان</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">یک شرکت</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">کل</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">یک شرکت</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">کل</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">یک شرکت</span></td>
+<td class="tg-sh4c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">کل</span></td>
+</tr>
+<tr class="even">
+<td class="tg-mrss"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">زیر 10 نفر</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">9,900</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">16,500</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">10</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">33,000</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-92dz"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">11 تا 50 نفر</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">11</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">42,746</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">25</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">97,150</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">50</span></td>
+<td class="tg-sh4c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">194,300</span></td>
+</tr>
+<tr class="even">
+<td class="tg-mrss"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">51 تا 200 نفر</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">51</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">46,869</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">125</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">114,875</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">200</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">183,800</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-92dz"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">201 تا 500 نفر</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">201</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">32,562</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">350</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">56,700</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">500</span></td>
+<td class="tg-sh4c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">81,000</span></td>
+</tr>
+<tr class="even">
+<td class="tg-mrss"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">501 تا 1000 نفر</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">501</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">27,555</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">750</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">41,250</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1,000</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">55,000</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-92dz"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1001 تا 5000 نفر</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1,001</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">30,030</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">3,000</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">90,000</span></td>
+<td class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5,000</span></td>
+<td class="tg-sh4c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">150,000</span></td>
+</tr>
+<tr class="even">
+<td class="tg-mrss"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">بیش از 5000 نفر</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5,000</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">45,000</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">7,000</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">63,000</span></td>
+<td class="tg-g2t9"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">10,000</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">90,000</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-92dz"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">کل</span></td>
+<td colspan="2" class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">234,662</span></td>
+<td colspan="2" class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">479,475</span></td>
+<td colspan="2" class="tg-al5c"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">787,100</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="g-col-2">
+
+</div>
+</div>
+<p>این جدول به ما نشان می‌دهد که اگر بخواهیم جمعیت را بر حسب کمترین تعداد افراد ذکر شده در دسته‌بندی حساب کنیم، ۲۳۴ هزار نفر خواهند بود. اگر بر حسب بیشترین مقدار محاسبه کنیم، با ۷۸۷ هزار نفر سر و کار خواهیم داشت. اما از آن جایی که شاهدی بر این مدعا نداریم که تمامی شرکت‌هایی که با آن‌ها روبرو خواهیم بود، در دو سط این طیف‌ها قرار خواهند گرفت، تخمین جمعیت را بر اساس میانه این بازه‌های جمعیتی محاسبه می‌کنیم و جمعیت شاغلان حوزه فناوری اطلاعات در استان تهران را <strong>۴۷۹۴۷۵</strong> نفر شاغل در <strong>۸۳۶۱</strong> شرکت در نظر می‌گیریم.</p>
+</section>
+</section>
+</div>
+<section id="نمونهگیری" class="level2 farsi">
+<h2 class="anchored" data-anchor-id="نمونهگیری">نمونه‌گیری</h2>
+<p>حال باید از میان ۴۷۹۴۷۵ نفر شاغلان این حوزه، به طور تصادفی نمونه‌ای انتخاب کرد. حداقل حجم این نمونه، بر اساس فرمول کوکران با خطای ۰.۰۵ درصد، ۳۸۴ نمونه می‌شود. با توجه به این که ممکن است در پر شدن پرسش‌نامه مشکلاتی پیش‌بینی نشده رخ دهد، تصمیم گرفتیم ۵۰۰ پرسش‌نامه پر شود تا بتوان حداقل ۴۰۰ پرسش‌نامه قابل قبول داشت.</p>
+<p>مساله این است که این پرسش‌نامه‌ها بین چه کسانی پخش شود. یعنی افرادی را که باید پرسش‌نامه پر کنند چگونه بیابیم؟ با توجه به این که شاغلان در شرکت‌ها برای پژوهش ما مهم هستند، این افراد را باید در شرکت‌ها یافت. پس راه دسترسی به آنان از طریق شرکت‌هایشان است. حال مساله از یافتن افراد به یافتن شرکت‌ها تغییر می‌کند.</p>
+<p>می‌توان شرکت‌ها را به صورت تصادفی انتخاب کرد. اما با توجه به این که شرکت‌های زیر ۵۰ نفر بخش بزرگی از شرکت‌ها را شامل می‌شوند، با احتمال بسیار بیشتری انتخاب می‌گردند و افراد شاغل در آن‌ها سهم بیشتری در میان پاسخ‌دهندگان خواهند داشت. بنابراین اریب ناپسندی در کار ایجاد خواهد شد. بنابراین انتخاب چنین روشی برای نمونه‌گیری روا نیست و باید سراغ نمونه‌گیری طبقه‌بندی رفت.</p>
+<section id="دستهبندی" class="level3">
+<h3 class="anchored" data-anchor-id="دستهبندی">دسته‌بندی</h3>
+<p>در نمونه‌گیری طبقه‌بندی باید به دنبال متغیری گشت که نمونه از آن نظر کاملا معرف باشد. حوزه فعالیت می‌تواند چنین متغیری قلمداد شود. اما اگر شرکت‌ها را بر اساس حوزه فعالیتشان طبقه‌بندی کنیم، تمام اعضای جمعیت احتمال انتخاب یکسانی نخواهند داشت و احتمال انتخاب از میان شرکت‌های پرجمعیت‌تر، به خاطر جمعیت بیشترشان و سهم بیشتری که در ترکیب جمعیتی هر دسته خواهند داشت، بیشتر خواهد بود.بنابراین شرایط و اهداف و انگیزه‌های کارکنان شرکت‌های بزرگ‌تر بازتاب پررنگ‌تری در تحلیل نهایی خواهد یافت. خود این شرکت‌ها به قدر کافی بر مسایل خودشان متمرکز بوده‌اند و به اندازه کافی دسترسی به تریبون‌های گوناگون دارند که مسایل خود را مطرح سازند. در این پژوهش هم به لحاظ اخلاقی، هم به لحاظ دقت آماری، بهتر است طبقه‌بندی دیگری اعمال شود.</p>
+<p>تعداد کارکنان متغیر دیگری است که می‌توان مبنای طبقه‌بندی باشد. از لحاظ این که مسایل شرکت‌های هم‌اندازه متناسب با سهم خودشان در بازار کار بررسی خواهد شد، مشکل نمونه‌گیری تصادفی را نخواهد داشت و از این لحاظ که گروه‌های کم‌جمعیت نیز در دسته‌های جداگانه قرار خواهند گرفت و مستقل از شرکت‌های بزرگ در نمونه‌گیری نماینده خواهند داشت، مشکل دسته‌بندی بر اساس حوزه فعالیت را نیز حل کرده‌ایم. در عین حال متغیری است که بر اساس داده‌های استخراج‌شده از جاب‌ویژن (با دقتی قابل قبول) به دست آمده است و نیازی به جمع‌آوری داده دیگری ندارد. پس مبنای دسته‌بندی را تعداد کارکنان قرار می‌دهیم و به دنبال دسته‌بندی‌های استانداردی می‌گردیم که در بازار کار ایران یا جهان مورد قبول باشند.</p>
+</section>
+<section id="تعریف-و-اهمیت-smeها-در-ایران" class="level3">
+<h3 class="anchored" data-anchor-id="تعریف-و-اهمیت-smeها-در-ایران">تعریف و اهمیت SMEها در ایران</h3>
+<p>در ایران تعریف مشخص و واحدی از بنگاه‌های کوچک و متوسط (SME)وجود ندارد و سازمان‌ها و ارگان‌های مختلف از تعاریف متفاوتی استفاده می‌کنند. به‌طور کلی، تعریف این بنگاه‌ها اغلب بر اساس تعداد کارکنان ارائه می‌شود. سازمان‌ها بسته به نیازهای خود، طبقه‌بندی‌های گوناگونی را لحاظ کرده‌اند.</p>
+<section id="تعاریف-ارائهشده-از-smeها" class="level4">
+<h4 class="anchored" data-anchor-id="تعاریف-ارائهشده-از-smeها">تعاریف ارائه‌شده از SMEها</h4>
+<ul>
+<li><p><strong>وزارت صنعت، معدن و تجارت و وزارت جهاد کشاورزی</strong>: بنگاه‌های کوچک و متوسط را واحدهای صنعتی و خدماتی با کمتر از 50 نفر کارکن تعریف می‌کنند</p></li>
+<li><p><strong>مرکز آمار ایران</strong>: طبقه‌بندی کسب‌وکارها به صورت زیر است:</p>
+<ul>
+<li>1 وتا 9 کارگر: کسب‌وکارهای خرد</li>
+<li>10 تا 49 کارگر: کسب‌وکارهای کوچک</li>
+<li>50 تا 99 کارگر: کسب‌وکارهای متوسط</li>
+<li>بیش از 100 کارگر: کسب‌وکارهای بزرگ</li>
+</ul></li>
+<li><p><strong>آیین‌نامه اجرایی گسترش بنگاه‌های کوچک و زودبازده (1384)</strong>: بنگاه‌های تولیدی (کالا و خدمات) با کمتر از 50 نفر کارکن را بنگاه کوچک می‌نامد</p></li>
+<li><p><strong>اداره آمار بانک مرکزی</strong>: تعریف مشابهی ارائه کرده است که واحدهای با کمتر از 10 نفر کارکن به‌عنوان خرد، 10 تا 49 نفر کوچک، 50 تا 99 نفر متوسط و بالای 100 نفر بزرگ دانسته می‌شوند.</p></li>
+</ul>
+</section>
+<section id="ویژگیهای-کیفی-smeها" class="level4">
+<h4 class="anchored" data-anchor-id="ویژگیهای-کیفی-smeها">ویژگی‌های کیفی SMEها</h4>
+<p>بنگاه‌های کوچک و متوسط دارای ویژگی‌های کیفی متمایزی هستند. برخی از این ویژگی‌ها عبارتند از: ارائه خدمات به مشتریان محلی یا داشتن سهم کوچکی از بازار. مدیریت و مالکیت توسط یک فرد یا گروه کوچک. دریافت کمک محدود از منابع مالی و انجام فعالیت به‌طور مستقل. فعالیت در کنار مؤسسات بزرگ و تأمین محصولات برای آن‌ها. تعاریف کیفی باید شامل چند ویژگی به‌طور همزمان باشند تا ماهیت SMEها را به درستی نشان دهند. برای مثال، این بنگاه‌ها معمولاً دارای معیارهایی همچون وحدت مالکیت و مدیریت، اندازه کوچک‌تر نسبت به شاخص‌های صنعت مربوطه و محیط کاری محلی هستند.</p>
+</section>
+<section id="سهم-smeها-در-اقتصاد-ایران" class="level4">
+<h4 class="anchored" data-anchor-id="سهم-smeها-در-اقتصاد-ایران">سهم SMEها در اقتصاد ایران</h4>
+<p>در ایران، SMEها حدود ۷ تا ۹ درصد تولید ناخالص داخلی (GDP) را تأمین کرده و ۶۰ درصد اشتغال کشور را ایجاد می‌کنند. بر اساس آمار: ۹۴ درصد واحدهای صنعتی شامل SMEها هستند. این صنایع ۴۳ درصد از مشاغل صنعتی کشور را فراهم می‌کنند. اقتصاد کشور به شدت تحت تأثیر شرکت‌های دولتی و شبه‌دولتی است که بیش از ۸۰ درصد اقتصاد را کنترل می‌کنند، به‌ویژه در حوزه‌های نفت، گاز و پتروشیمی. این وابستگی‌ها نقش SMEها را در اقتصاد کشور پررنگ‌تر می‌سازد.</p>
+</section>
+<section id="الزامات-برای-توسعه-smeها" class="level4">
+<h4 class="anchored" data-anchor-id="الزامات-برای-توسعه-smeها">الزامات برای توسعه SMEها</h4>
+<p>وجود تعاریف مختلف از SMEها نیاز به یک تعریف مشترک را ضروری می‌سازد. این امر موجب خواهد شد:</p>
+<ul>
+<li>شاخص‌های اقتصادی ایران با استانداردهای بین‌المللی قابل مقایسه شوند.</li>
+<li>سیاست‌های اقتصادی نهادها همسو و هماهنگ گردد.</li>
+</ul>
+<p>اتاق بازرگانی می‌تواند نقش مهمی در توسعه SMEها ایفا کند. با تدوین یک سند ملی می‌توان ظرفیت‌ها و چالش‌های این بخش را ارزیابی و تأثیرات اقتصادی، اجتماعی و فرهنگی آن‌ها را در مناطق مختلف کشور تحلیل کرد. نتیجه‌گیری این سند می‌تواند برنامه‌ای جامع برای توسعه متوازن و پایدار SMEها بر اساس پتانسیل‌های هر منطقه ارائه دهد.</p>
+</section>
+</section>
+<section id="انتخاب-مبنای-دستهبندی" class="level3">
+<h3 class="anchored" data-anchor-id="انتخاب-مبنای-دستهبندی">انتخاب مبنای دسته‌بندی</h3>
+<p>با این اوصاف، نمی‌توان تعریف‌های نهادهای دیگر را بر داده‌هایی که جمع آورده‌ایم اعمال کرد چون هم استانداردی در میانشان وجود ندارد و هم شرکت‌های بزرگی را که با آن‌ها نیز سر و کار داریم در بر نمی‌گیرند. با همان دسته‌بندی ارائه‌شده در وبسایت جاب‌ویژن طبقه‌بندی را انجام خواهیم داد؛ با علم به این که داده‌ها به صورت خوداظهاری در سایت ثبت می‌شوند و مکانیسمی برای تایید و صحت‌سنجی آن‌ها وجود ندارد.</p>
+</section>
+<section id="انجام-نمونهگیری" class="level3">
+<h3 class="anchored" data-anchor-id="انجام-نمونهگیری">انجام نمونه‌گیری</h3>
+<p>با توجه به تعداد پرسش‌نامه‌های مورد نیاز، یعنی ۵۰۰ پرسش‌نامه، در ابتدا حساب کردیم هر دسته به طور کلی چند پرسش‌نامه باید پر کند. سپس از آن جا که زمان اجرای پیمایش محدود است، در نظر گرفتیم که حداقل ۳ و حداکثر ۱۰ شرکت در هر دسته انتخاب شوند. سپس برای هر دسته، این تعداد را به طور تصادفی و با استفاده از برنامه ساده پایتونی حساب کردیم. بر اساس این عدد انتخاب شده در هر دسته، محاسبه کردیم که هر شرکت چند پرسش‌نامه باید پر کند. نتیجه این محاسبات را در جدول زیر می‌بینید:</p>
+<div class="grid">
+<div class="g-col-2">
+
+</div>
+<div class="g-col-8">
+<style type="text/css">
+.tg  {border-collapse:collapse;border-color:black;border-spacing:0;border-style:solid;border-width:1px;margin:0px auto;}
+.tg td{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;
+  padding:10px 5px;word-break:normal;}
+.tg th{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-baqh{text-align:center;vertical-align:top}
+.tg .tg-lqy6{text-align:right;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;margin: auto 0px;}}</style>
+<div class="tg-wrap">
+<table class="tg caption-top table" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="tg-0lax" data-quarto-table-cell-role="th"></th>
+<th class="tg-baqh" data-quarto-table-cell-role="th"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">کل پرسش‌نامه</span></th>
+<th class="tg-baqh" data-quarto-table-cell-role="th"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تعداد شرکت</span></th>
+<th class="tg-baqh" data-quarto-table-cell-role="th"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">تعداد نفر پرکننده در شرکت</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="tg-lqy6"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">زیر 10 نفر</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">18</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+</tr>
+<tr class="even">
+<td class="tg-lqy6"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">11 تا 50 نفر</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">102</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">6</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">17</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-lqy6"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">51 تا 200 نفر</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">120</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">4</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">30</span></td>
+</tr>
+<tr class="even">
+<td class="tg-lqy6"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">201 تا 500 نفر</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">60</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">12</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-lqy6"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">501 تا 1000 نفر</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">44</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">9</span></td>
+</tr>
+<tr class="even">
+<td class="tg-lqy6"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">1001 تا 5000 نفر</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">94</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">5</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">19</span></td>
+</tr>
+<tr class="odd">
+<td class="tg-lqy6"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">بیش از 5000 نفر</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">66</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">2</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">33</span></td>
+</tr>
+<tr class="even">
+<td class="tg-lqy6"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">کل</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">504</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">31</span></td>
+<td class="tg-baqh"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">508</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="g-col-2">
+
+</div>
+</div>
+<p>سپس برنامه‌ای پایتونی نوشتیم که از میان شرکت‌های استخراج و پالوده شده، بر حسب دسته‌بندی تعداد کارکنان و به تعداد شرکت‌ها، به طور تصادفی، از هر دسته شرکت‌هایی را انتخاب کند و فهرستی از ۳۱ شرکت در اختیارمان قرار دهد.</p>
+</section>
+<section id="چرخه-انتخاب-شرکتها" class="level3">
+<h3 class="anchored" data-anchor-id="چرخه-انتخاب-شرکتها">چرخه انتخاب شرکت‌ها</h3>
+<p>هر کدام از شرکت‌های این لیست چک می‌شوند که وبسایت فعال داشته باشند. اگر داشتند، به لیست تماس اضافه می‌شوند. اگر وبسایت فعال نداشتند یا اطلاعات موثقی از فعالیتشان در جستجوی ساده اینترنتی یافت نشد، آن‌ها را از لیست ۳۱ تایی خود خارج می‌کنیم و شرکتی از همان دسته‌بندی جایگزین آن‌ها می‌شود. در صورتی که با شرکتی تماس گرفته شد و مایل به همکاری در این پژوهش نبودند، آنان نیز با شرکتی دیگر جایگزین خواهند شد. نکته مهم قابل توجه این است که پس از پاکسازی اولیه و تثبیت ۸۳۶۱ شرکت، تعداد کل شرکت‌ها تغییری نمی‌کند، یعنی شرکتی از لیست اصلی شرکت‌ها حذف نمی‌گردد. بلکه از لیست‌های کاری حذف می‌شود. حذف از لیست اصلی به معنای تغییر در احتمال انتخاب شرکت‌هاست، شرکت‌های بعد از مرحله حذف احتمال بیشتری برای انتخاب شدن دارند. کارکنان آنان نیز با احتمالی متفاوت انتخاب می‌شوند. پس، اگر در میانه راه شرکتی را حذف کرده باشیم، با نمونه‌ای از افراد تصادفی روبرو هستیم که با احتمال یکسانی انتخاب نشده‌اند و نتایج تحلیل نسبت به این تغییرات بی‌تفاوت نخواهد بود.</p>
+</section>
+</section>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
